@@ -11,3 +11,5 @@ class personBpi {
     console.log(`Dear ${this.name} your BPI is ${bpi}`);
   }
 }
+
+if pers
