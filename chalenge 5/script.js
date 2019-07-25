@@ -13,27 +13,27 @@ var restaurant = function(a){
 	}
 
 }
-
+johnbills = [128, 48, 268, 180];
+markbills = [77, 375, 110, 45]
 
 var bill = {
-	 bills: [124, 48, 268, 180],
 	 tips: [],
-	 paids: [],
-	 amount: function() {
-	 	console.log(this.bills.length)
-	 	for(var i = 0; i < this.bills.length; i++){
-	 		if( this.bills[i] < 50){
-				this.tips[i] =  this.bills[i] * .2;
+	 paids: [], 
+	 amount: function(bills) {
 
-			} else if ( this.bills[i] === 50 || ( this.bills[i] > 50 && this.bills[i] < 200 ) ) {
-			    this.tips[i] =  this.bills[i] * .15;
+	 	for(var i = 0; i < bills.length; i++){
+	 		if( bills[i] < 50){
+				this.tips[i] =  bills[i] * .2;
+
+			} else if ( bills[i] === 50 || ( bills[i] > 50 && bills[i] < 200 ) ) {
+			    this.tips[i] =  bills[i] * .15;
 
 			
 			} else {
-				this.tips[i] =  this.bills[i] * .10;
+				this.tips[i] =  bills[i] * .10;
 
 			}
-		this.paids[i] = this.tips[i] + this.bills[i];
+		this.paids[i] = this.tips[i] + bills[i];
 		console.log(restaurant(i) + this.tips[i] + " and the final paid amount was " + this.paids[i]);
 	 	}
 	 },
@@ -41,7 +41,8 @@ var bill = {
 	 
 }
 console.log(bill.bills)
-bill.amount();
+bill.amount(johnbills);
+bill.amount(markbills);
 console.log(bill.paids)
 console.log(bill)
 
