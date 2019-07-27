@@ -17,3 +17,5 @@ var dice = Math.floor(Math.random() * 6) + 1;
 console.log(dice);
 
 document.querySelector('#current-' + activePlayer).textContent = dice;
+var x =  document.querySelector('#score-' + activePlayer).textContent;
+document.querySelector('.dice').setAttribute('src', 'dice-' + dice + ".png");
