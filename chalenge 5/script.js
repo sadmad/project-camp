@@ -14,7 +14,7 @@ var restaurant = function(a){
 
 }
 johnbills = [128, 48, 268, 180];
-markbills = [77, 375, 110, 45]
+markbills = [77, 475, 110, 45]
 
 var bill = {
 	 tips: [],
