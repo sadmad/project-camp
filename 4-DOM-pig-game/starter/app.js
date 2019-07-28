@@ -12,7 +12,10 @@ GAME RULES:
 var scores = [0, 0];
 var roundScore = 0;
 var activePlayer = 0;
-
+document.getElementById('score-0').textContent = "0";
+document.getElementById('score-1').textContent = "0";
+document.getElementById('current-0').textContent = "0";
+document.getElementById('cuttent-1').textContent = "0"
 
 
 document.querySelector('.dice').style.display = 'none';
@@ -24,10 +27,17 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
 	// 2. Display the result
 	document.querySelector('.dice').style.display = 'block';
 	document.querySelector('.dice').setAttribute('src', 'dice-' + dice + ".png");
+	document.getElementById('score-0').textContent = "0";
 
 	// 3.Update the round score IF the rolled number was not No.1
 	var x = document.querySelector('#current-' + activePlayer).textContent
 	if( dice > 1 ){
 		document.querySelector('#current-' + activePlayer).textContent = parseInt(x) + dice;
+	}else{
+		if (activePlayer === 0){
+			activePlayer = 1;
+		}else{
+			activePlayer = 0;
+		}
 	}
 });
