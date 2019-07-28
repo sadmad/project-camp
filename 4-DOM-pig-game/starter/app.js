@@ -15,11 +15,12 @@ var activePlayer = 0;
 document.getElementById('score-0').textContent = "0";
 document.getElementById('score-1').textContent = "0";
 document.getElementById('current-0').textContent = "0";
-document.getElementById('cuttent-1').textContent = "0"
+document.getElementById('current-1').textContent = "0";
 
 
 document.querySelector('.dice').style.display = 'none';
 
+// Roll dice event start
 document.querySelector('.btn-roll').addEventListener('click', function(){
 	// 1. Random number
 	var dice = Math.floor(Math.random() * 6) + 1;
@@ -27,17 +28,26 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
 	// 2. Display the result
 	document.querySelector('.dice').style.display = 'block';
 	document.querySelector('.dice').setAttribute('src', 'dice-' + dice + ".png");
-	document.getElementById('score-0').textContent = "0";
 
 	// 3.Update the round score IF the rolled number was not No.1
-	var x = document.querySelector('#current-' + activePlayer).textContent
 	if( dice > 1 ){
-		document.querySelector('#current-' + activePlayer).textContent = parseInt(x) + dice;
+		roundScore += dice;
+		document.getElementById('current-' + activePlayer).textContent = roundScore;
 	}else{
+		//change the active player
 		if (activePlayer === 0){
 			activePlayer = 1;
 		}else{
 			activePlayer = 0;
 		}
 	}
+});
+
+//Hold event start
+document.querySelector('.btn-hold').addEventListener('click', function(){
+	scores = parseInt(document.getElementById('score-' + activePlayer).textContent);
+	scores += parseInt(document.getElementById('current-' + activePlayer).textContent);
+	document.getElementById('score-' + activePlayer).textContent = scores;
+	document.getElementById('current-' + activePlayer).textContent = "0";
+	activePlayer === 0? activePlayer = 1 : activePlayer = 0;
 });
