@@ -20,6 +20,16 @@ document.getElementById('current-1').textContent = "0";
 
 document.querySelector('.dice').style.display = 'none';
 
+var activeChange = function(){
+	activePlayer === 0? activePlayer = 1 : activePlayer = 0;
+	roundScore = 0;
+	document.getElementById('current-0').textContent = 0;
+	document.getElementById('current-1').textContent = 0;
+	document.querySelector('.player-0-panel').classList.toggle('active');
+	document.querySelector('.player-1-panel').classList.toggle('active');
+	document.querySelector('.dice').style.display = 'none';
+}
+
 // Roll dice event start
 document.querySelector('.btn-roll').addEventListener('click', function(){
 	// 1. Random number
@@ -35,18 +45,7 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
 		document.getElementById('current-' + activePlayer).textContent = roundScore;
 	}else{
 		//change the active player
-		if (activePlayer === 0){
-			activePlayer = 1;
-			roundScore = 0;
-			document.getElementById('current-0').textContent = 0;
-			document.getElementById('current-1').textContent = 0;
-		}else{
-			activePlayer = 0;
-			roundScore = 0;
-			document.getElementById('current-0').textContent = 0;
-			document.getElementById('current-1').textContent = 0;
-
-		}
+	 	activeChange();
 	}
 });
 
@@ -55,9 +54,8 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
 	scores = parseInt(document.getElementById('score-' + activePlayer).textContent);
 	scores += parseInt(document.getElementById('current-' + activePlayer).textContent);
 	document.getElementById('score-' + activePlayer).textContent = scores;
-	roundScore = 0;
-	document.getElementById('current-' + activePlayer).textContent = "0";
-	activePlayer === 0? activePlayer = 1 : activePlayer = 0;
+	activeChange()
+
 });
 
 //New Button
@@ -67,4 +65,5 @@ document.querySelector('.btn-new').addEventListener('click', function(){
 	document.getElementById('score-1').textContent = "0";
 	document.getElementById('current-0').textContent = "0";
 	document.getElementById('current-1').textContent = "0";
+	document.querySelector('.dice').style.display = 'none';
 })
