@@ -37,8 +37,15 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
 		//change the active player
 		if (activePlayer === 0){
 			activePlayer = 1;
+			roundScore = 0;
+			document.getElementById('current-0').textContent = 0;
+			document.getElementById('current-1').textContent = 0;
 		}else{
 			activePlayer = 0;
+			roundScore = 0;
+			document.getElementById('current-0').textContent = 0;
+			document.getElementById('current-1').textContent = 0;
+
 		}
 	}
 });
@@ -48,6 +55,16 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
 	scores = parseInt(document.getElementById('score-' + activePlayer).textContent);
 	scores += parseInt(document.getElementById('current-' + activePlayer).textContent);
 	document.getElementById('score-' + activePlayer).textContent = scores;
+	roundScore = 0;
 	document.getElementById('current-' + activePlayer).textContent = "0";
 	activePlayer === 0? activePlayer = 1 : activePlayer = 0;
 });
+
+//New Button
+document.querySelector('.btn-new').addEventListener('click', function(){
+
+	document.getElementById('score-0').textContent = "0";
+	document.getElementById('score-1').textContent = "0";
+	document.getElementById('current-0').textContent = "0";
+	document.getElementById('current-1').textContent = "0";
+})
