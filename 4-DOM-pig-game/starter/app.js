@@ -8,7 +8,7 @@ GAME RULES:
 - The first player to reach 100 points on GLOBAL score wins the game
 
 */
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, lastDice, winningScore;
 
 
 function init() {
@@ -16,6 +16,7 @@ function init() {
 	roundScore = 0;
 	activePlayer = 0;
 	gamePlaying = true;
+	winningScore = 0;
 	document.getElementById('score-0').textContent = "0";
 	document.getElementById('score-1').textContent = "0";
 	document.getElementById('current-0').textContent = "0";
@@ -28,6 +29,8 @@ function init() {
 	document.querySelector('.player-1-panel').classList.remove('winner');
 	document.querySelector('.player-1-panel').classList.remove('active');
 	document.querySelector('.player-' + activePlayer + '-panel').classList.add('active');
+	winningScore = document.querySelector('.input-score').value;
+	console.log(winningScore)
 
 }
 
@@ -36,6 +39,8 @@ init();
 var activeChange = function(){
 	activePlayer === 0? activePlayer = 1 : activePlayer = 0;
 	roundScore = 0;
+	lastDice = 0;
+	
 	document.getElementById('current-0').textContent = 0;
 	document.getElementById('current-1').textContent = 0;
 	document.querySelector('.dice').style.display = 'none;';
@@ -47,6 +52,7 @@ var activeChange = function(){
 document.querySelector('.btn-roll').addEventListener('click', function(){
 	if(gamePlaying){
 	// 1. Random number
+	
 	var dice = Math.floor(Math.random() * 6) + 1;
 
 	// 2. Display the result
@@ -54,13 +60,21 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
 	document.querySelector('.dice').setAttribute('src', 'dice-' + dice + ".png");
 
 	// 3.Update the round score IF the rolled number was not No.1
-	if( dice > 1 ){
-		roundScore += dice;
-		document.getElementById('current-' + activePlayer).textContent = roundScore;
-
+	if( lastDice === 6 && dice === 6){
+	  document.getElementById('score-0').textContent = "0";
+	  console.log('fuck')
+	  activeChange();
 	}else{
-		//change the active player
-	 	activeChange();
+
+		if( dice > 1 ){
+			roundScore += dice;
+			document.getElementById('current-' + activePlayer).textContent = roundScore;
+			lastDice = dice;
+
+		}else{
+			//change the active player
+		 	activeChange();
+		}	
 	}
 }
 });
@@ -70,7 +84,7 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
 	scores = parseInt(document.getElementById('score-' + activePlayer).textContent);
 	scores += parseInt(document.getElementById('current-' + activePlayer).textContent);
 	document.getElementById('score-' + activePlayer).textContent = scores;
-	if( scores >= 20){
+	if( scores >= winningScore){
 		document.querySelector('#name-' + activePlayer).textContent = 'winner!';
 		document.querySelector('.dice').style.display = 'none;';
 		document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');			
