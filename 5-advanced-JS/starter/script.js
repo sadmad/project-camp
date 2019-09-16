@@ -473,3 +473,34 @@ c) correct answer (I would use a number for this)
     
 })();
 */
+
+var years = [1956, 1984, 1990, 2000, 1980, 2010];
+
+function pushArray(arr, func){
+    var arrRes = [];
+
+    for( var i = 0 ; i < arr.length; i++) {
+
+        arrRes.push(func(arr[i]));
+    }
+    return arrRes;
+}
+
+function calculateAge(year) {
+    return 2019 - year;
+}
+
+function ligalAge(year) {
+    if ( (2019 - year) > 18 ){
+        return true
+    }else{
+        return false
+    }
+}
+
+var age = pushArray(years, calculateAge);
+console.log(age);
+
+var ligal =  pushArray(years, ligalAge);
+
+console.log(ligal) 
